@@ -4,6 +4,7 @@ fn main() {
     println!("Have fun!");
     let mut world = World::init_world();
     let mut command_repo = CommandRepo::new();
+    command_repo.init_commands();
     let mut game = Game::new(world, command_repo);
     game_loop(game);
 }
@@ -14,7 +15,7 @@ fn game_loop(game: Game) {
         game.world.player.location.print_location();
         println!("hp: {}>>", game.world.player.hp);
         let player_input = get_input();
-        textadventure::commands::parse_command(player_input);
+        textadventure::commands::parse_command(player_input, &game.commands);
         is_dead = true;
     }
 }
